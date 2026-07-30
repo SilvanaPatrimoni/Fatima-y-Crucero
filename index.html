@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Crucero Mediterráneo — Fátima & Martín</title>
+<title>El Pasaporte de Fátima — Crucero Mediterráneo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -207,6 +207,12 @@
   .words-table td{ padding:9px 4px; border-bottom:2px dotted rgba(255,93,143,0.2); font-size:15px;}
   .words-table td:first-child{ color:#8a8474; font-size:12.5px; text-transform:uppercase; letter-spacing:.06em; width:34%;}
   .words-table td:last-child{ font-family:'Fraunces', serif; font-style:italic; font-weight:600; color:var(--coral-dim);}
+  .words-table .pron{ font-family:'IBM Plex Mono', monospace; font-style:normal; font-weight:500; font-size:12.5px; color:var(--aqua);}
+  .encourage{
+    margin-top:16px; padding:12px 14px; border-radius:12px;
+    background: linear-gradient(90deg, rgba(139,224,92,0.15), rgba(63,203,255,0.15));
+    font-size:14px; line-height:1.5; color:#3a3830;
+  }
 
   .challenge-card{ border-left: 4px solid var(--lime); padding-left:14px; margin-top:2px; background: linear-gradient(90deg, rgba(139,224,92,0.12), transparent); border-radius: 0 12px 12px 0;}
   .vs{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.1em; color:var(--coral-dim); text-transform:uppercase; margin-bottom:8px; display:block;}
@@ -237,6 +243,34 @@
   .endslide h1{ font-family:'Fraunces', serif; font-size: clamp(28px,7vw,44px); margin-bottom:14px;}
   .endslide p{ font-size:16px; line-height:1.6; color: rgba(251,245,233,0.75); }
   .endslide .bigicon{ font-size:60px; margin-bottom:18px; }
+
+  /* ===== WELCOME SLIDE (regalo de mamá) ===== */
+  .welcome-cover{
+    background: linear-gradient(160deg, rgba(255,93,143,0.35), rgba(142,92,255,0.35), rgba(63,203,255,0.35));
+    border: 2px solid rgba(255,255,255,0.25);
+  }
+  .giftbadge{
+    display:inline-block; font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    background: rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.4);
+    padding:6px 14px; border-radius:100px; margin-bottom:20px;
+  }
+  .welcome-stamp{ border-color: var(--coral); }
+  .welcome-text{
+    font-size:16px; line-height:1.65; color: rgba(255,255,255,0.95);
+    max-width: 420px; margin: 0 auto 10px; padding: 0 6px;
+  }
+
+  /* ===== SHARE TIP CARD (dato para el grupo) ===== */
+  .sharetip-card{
+    background: linear-gradient(160deg, #FFF9E8, var(--paper));
+    border: 2px solid var(--gold);
+  }
+  .sharetip-eyebrow{
+    background: linear-gradient(90deg, rgba(255,201,60,0.3), rgba(255,93,143,0.2));
+    color: var(--coral-dim);
+    font-weight:700;
+  }
   .endslide .diarybtn-big{ margin-top:22px; }
 
   /* ===== DIARIO DE VIAJE ===== */
@@ -342,7 +376,7 @@
 
 <div class="app">
   <div class="topbar">
-    <span class="brand">🌈 Pasaporte Mediterráneo</span>
+    <span class="brand">🌈 El Pasaporte de Fátima</span>
     <div class="topbar-actions">
       <button class="diarybtn" id="openDiaryBtn">📖 Mi diario</button>
       <span class="counter" id="counter">1 / 1</span>
@@ -425,18 +459,21 @@ const DAY_IMAGES = {
 const DAYS = [
 {
   place:"Estambul", country:"Turquía — antes del crucero", flag:"🇹🇷", icon:"🕌", dateLabel:"30 JUL",
-  words:[["Hola","Merhaba"],["Gracias","Teşekkürler"],["Adiós","Hoşça kal"]],
+  words:[["Hola","Merhaba","mer-ha-bá"],["Gracias","Teşekkürler","te-she-kur-ler"],["Adiós","Hoşça kal","osh-cha kal"]],
   scenes:[
     {tag:"Gancho", onscreen:"La única ciudad del mundo parada sobre dos continentes", voice:"¿Sabían que van a estar en la única ciudad del mundo que está parada sobre dos continentes al mismo tiempo? Una parte en Europa, otra en Asia, separadas por el estrecho del Bósforo."},
     {tag:"Origen", onscreen:"De Bizancio a Constantinopla, de Constantinopla a Estambul", voice:"La ciudad fue fundada hace casi 2,700 años por colonos griegos, que la llamaron Bizancio. En el año 330 el emperador romano Constantino la convirtió en la nueva capital del Imperio Romano y le puso su nombre: Constantinopla. Durante más de 1,000 años fue la ciudad más rica y poderosa de Europa."},
     {tag:"Evento clave", onscreen:"Santa Sofía: iglesia, mezquita, museo... y mezquita otra vez", voice:"Santa Sofía la construyeron los bizantinos en el año 537, y durante casi 1,000 años fue el edificio más grande del mundo. En 1453 los otomanos conquistaron la ciudad y la convirtieron en mezquita. En 1934 se volvió museo, y en 2020 volvió a ser mezquita."},
     {tag:"Dato cultural", onscreen:"20,000 azulejos azules en la Mezquita Azul", voice:"La Mezquita Azul se construyó en 1616 y es famosa por los más de 20,000 azulejos de cerámica azul que cubren su interior. Frente a Santa Sofía, las dos juntas son la postal más famosa de Estambul."},
+    {tag:"¿Qué es una mezquita?", onscreen:"El templo de una religión con casi 2,000 millones de personas en el mundo", voice:"Una mezquita es el templo donde oran los musulmanes, las personas que practican el Islam — una de las religiones más grandes del mundo, junto con el cristianismo. Dentro no hay bancas ni sillas: la gente ora de pie, arrodillada e inclinada sobre una alfombra, mirando siempre hacia La Meca, la ciudad más sagrada del Islam. Los musulmanes oran 5 veces al día, en horarios marcados por la posición del sol, y por eso antes se llamaba a la oración desde los minaretes — hoy casi siempre con altavoces."},
+    {tag:"¿Por qué usan hiyab?", onscreen:"Un pañuelo que cubre el cabello, por elección personal y religiosa", voice:"El hiyab es el pañuelo que algunas mujeres musulmanas usan para cubrirse el cabello, como parte de su fe. No todas las musulmanas lo usan — es una decisión personal, y varía mucho según el país, la familia y cada mujer. En Turquía van a ver mujeres con hiyab caminando junto a otras sin él, viviendo con total normalidad una al lado de la otra."},
     {tag:"Mercado de las Especias", onscreen:"Especias que valían más que el oro", voice:"El Mercado de las Especias se construyó en 1660. Ahí llegaban en barco canela, azafrán y pimienta desde India, productos tan valiosos que a veces costaban más que el oro. Hoy sigue funcionando igual, con montañas de especias de colores."},
     {tag:"Torre Gálata", onscreen:"67 metros de altura, construida por comerciantes italianos", voice:"La Torre Gálata la construyeron los genoveses en 1348, como parte de las murallas de su barrio comercial. Durante siglos fue el edificio más alto de Estambul. Desde arriba se ve toda la ciudad, incluyendo el punto exacto donde Europa y Asia se separan por el agua."},
     {tag:"Gastronomía", onscreen:"Prueben: Lokum (delicia turca) y té turco", voice:"Prueben el lokum, dulces suaves espolvoreados con azúcar glass, y un té turco servido en vasito de cristal en forma de tulipán — así se toma en toda la ciudad, varias veces al día."},
     {tag:"Palabras clave", onscreen:"Para hablar como local", words:true},
     {tag:"Reto — Fátima vs. Martín", onscreen:"¿Quién cuenta primero los minaretes de la Mezquita Azul?", voice:"Los minaretes son esas torres altas y delgadas junto a la mezquita, desde donde antes llamaban a la oración en voz alta. La Mezquita Azul tiene 6, algo rarísimo — casi ninguna mezquita del mundo tiene tantos. El que los cuente bien primero, gana el punto.", challenge:true},
-    {tag:"Cierre", onscreen:"Estambul: donde Europa y Asia se dan la mano", voice:"Estambul: la ciudad donde Europa y Asia se dan la mano, y donde 2,700 años de historia caben en un solo paseo."}
+    {tag:"Cierre", onscreen:"Estambul: donde Europa y Asia se dan la mano", voice:"Estambul: la ciudad donde Europa y Asia se dan la mano, y donde 2,700 años de historia caben en un solo paseo."},
+    {tag:"🎤 Para contarle al grupo", onscreen:"¿Sabían que están sobre dos continentes al mismo tiempo? Una parte de la ciudad está en Europa y la otra en Asia, separadas por el mar.", shareTip:true}
   ]
 },
 {
@@ -447,26 +484,29 @@ const DAYS = [
     {tag:"Dato", onscreen:"Un mar que mezcló culturas enteras", voice:"Gracias a este mar se mezclaron culturas que nunca se hubieran conocido. Por eso vas a ver cosas parecidas en países distintos: columnas griegas en Turquía, iglesias bizantinas en Croacia, palabras en español que vienen del árabe o del griego."},
     {tag:"Qué viene", onscreen:"6 países. 11 días. Una sola historia.", voice:"En los próximos días vas a pisar Turquía, Grecia, Croacia, Montenegro, Italia y España. Cada lugar tiene una historia distinta, y la van a vivir en primera fila."},
     {tag:"Reto — Fátima vs. Martín", onscreen:"¿Cuántos países van a visitar en total?", voice:"El primero que adivine cuántos países van a visitar gana un punto. Pista: son 6. Anótenlos en orden.", challenge:true},
-    {tag:"Cierre", onscreen:"El Mediterráneo: donde nació buena parte de la historia", voice:"El Mediterráneo no es solo un mar: es el escenario donde nació buena parte de la historia que todavía vivimos hoy."}
+    {tag:"Cierre", onscreen:"El Mediterráneo: donde nació buena parte de la historia", voice:"El Mediterráneo no es solo un mar: es el escenario donde nació buena parte de la historia que todavía vivimos hoy."},
+    {tag:"🎤 Para contarle al grupo", onscreen:"Los romanos le decían a este mar 'Mare Nostrum', que significa 'nuestro mar' — así de importante era para ellos.", shareTip:true}
   ]
 },
 {
   place:"Kusadasi / Éfeso", country:"Turquía", flag:"🇹🇷", icon:"🏛️", dateLabel:"1 AGO",
-  words:[["Hola","Merhaba"],["Gracias","Teşekkürler"],["Adiós","Hoşça kal"]],
+  words:[["Hola","Merhaba","mer-ha-bá"],["Gracias","Teşekkürler","te-she-kur-ler"],["Adiós","Hoşça kal","osh-cha kal"]],
   scenes:[
     {tag:"Gancho", onscreen:"Una ciudad de 2,000 años con anuncios... en el piso", voice:"¿Qué tal si te dijera que vas a caminar por una ciudad de hace 2,000 años que tenía baños públicos, un teatro para 25,000 personas y hasta publicidad grabada en piedra? Bienvenida a Éfeso."},
     {tag:"Origen", onscreen:"Fundada por griegos, hace más de 3,000 años", voice:"Kusadasi es el puerto moderno, pero lo que van a visitar es Éfeso, fundada por griegos hace más de 3,000 años y convertida después en una de las ciudades más importantes del Imperio Romano. ¡Llegó a tener casi 250,000 habitantes!"},
     {tag:"Evento clave", onscreen:"Una de las 7 Maravillas del Mundo Antiguo estaba aquí", voice:"Ahí estaba el Templo de Artemisa, una de las 7 Maravillas del Mundo Antiguo. Se incendió, lo reconstruyeron, y hoy solo queda una columna en pie."},
+    {tag:"Casa de la Virgen María", onscreen:"La casa donde, según la tradición, vivió María sus últimos años", voice:"Cerca de Éfeso, en la cima de una montaña, hay una pequeña casa de piedra llamada Meryemana. Según la tradición cristiana, ahí vivió la Virgen María sus últimos años, llevada por el apóstol Juan. Hoy es un santuario visitado por peregrinos católicos y musulmanes por igual, y hay un muro cubierto de miles de papelitos con deseos y oraciones dejados por los visitantes."},
     {tag:"Dato cultural", onscreen:"Tradición y modernidad, lado a lado", voice:"Turquía es un país musulmán, así que van a ver mujeres con hiyab caminando junto a turistas en shorts. Turquía mezcla tradición religiosa con vida moderna todo el tiempo."},
     {tag:"Gastronomía", onscreen:"Prueben: Baklava 🍯", voice:"Prueben un baklava: capas de masa finita con nueces y miel, una receta que las familias turcas hacen igual desde hace generaciones."},
     {tag:"Palabras clave", onscreen:"Para hablar como local", words:true},
     {tag:"Reto — Fátima vs. Martín", onscreen:"¿Quién ve primero la columna de Artemisa?", voice:"El que la vea primero grita '¡Artemisa!' y gana el punto.", challenge:true},
-    {tag:"Cierre", onscreen:"Éfeso: tan grande, que hasta el mar se fue", voice:"Éfeso: la ciudad que fue tan grande, que el mar que la rodeaba... hoy ya ni siquiera está ahí."}
+    {tag:"Cierre", onscreen:"Éfeso: tan grande, que hasta el mar se fue", voice:"Éfeso: la ciudad que fue tan grande, que el mar que la rodeaba... hoy ya ni siquiera está ahí."},
+    {tag:"🎤 Para contarle al grupo", onscreen:"Éfeso llegó a tener casi 250,000 habitantes hace 2,000 años — más gente que muchas ciudades medianas de hoy.", shareTip:true}
   ]
 },
 {
   place:"Santorini", country:"Grecia", flag:"🇬🇷", icon:"🌋", dateLabel:"2 AGO",
-  words:[["Hola","Yiasou"],["Gracias","Efjaristó"],["Adiós","Andío"]],
+  words:[["Hola","Yiasou","yiá-su"],["Gracias","Efjaristó","ef-ja-ris-tó"],["Adiós","Andío","an-dí-o"]],
   scenes:[
     {tag:"Gancho", onscreen:"La explosión que pudo inspirar la Atlántida", voice:"¿Sabías que la isla donde vas a estar hoy explotó hace 3,600 años con tanta fuerza que pudo haber inspirado el mito de la Atlántida?"},
     {tag:"Origen", onscreen:"Una isla redonda... partida por un volcán", voice:"Santorini era una isla redonda, hasta que un volcán gigante hizo erupción y la partió en forma de media luna. Ese acantilado que ves es el borde de un volcán semi-hundido."},
@@ -475,12 +515,13 @@ const DAYS = [
     {tag:"Gastronomía", onscreen:"Prueben: Fava santorinia", voice:"Prueben las fava santorinias, un puré de una lenteja amarilla que solo crece ahí, gracias a la tierra volcánica."},
     {tag:"Palabras clave", onscreen:"Para hablar como local", words:true},
     {tag:"Reto — Fátima vs. Martín", onscreen:"¿Quién cuenta más iglesias de cúpula azul?", voice:"Cada uno cuenta por su lado cuántas iglesias de cúpula azul logra ver. El que cuente más, gana el punto.", challenge:true},
-    {tag:"Cierre", onscreen:"Santorini: nacida de una explosión", voice:"Santorini: la isla que nació de una explosión y terminó siendo uno de los lugares más fotografiados del planeta."}
+    {tag:"Cierre", onscreen:"Santorini: nacida de una explosión", voice:"Santorini: la isla que nació de una explosión y terminó siendo uno de los lugares más fotografiados del planeta."},
+    {tag:"🎤 Para contarle al grupo", onscreen:"Las casas blancas no son solo bonitas: el blanco refleja el calor del sol y mantiene las casas frescas por dentro.", shareTip:true}
   ]
 },
 {
   place:"Mykonos", country:"Grecia", flag:"🇬🇷", icon:"🎐", dateLabel:"3 AGO",
-  words:[["Hola","Yiasou"],["Gracias","Efjaristó"],["Adiós","Andío"]],
+  words:[["Hola","Yiasou","yiá-su"],["Gracias","Efjaristó","ef-ja-ris-tó"],["Adiós","Andío","an-dí-o"]],
   scenes:[
     {tag:"Gancho", onscreen:"Los molinos que no son decoración", voice:"¿Ves esos molinos de viento tan famosos? No son decoración: durante siglos fueron la única forma de moler trigo en la isla."},
     {tag:"Origen", onscreen:"Poca tierra, mucho viento", voice:"Mykonos era pobre en recursos, así que sus habitantes aprovecharon lo único que tenían de sobra: viento. Por eso construyeron molinos en las colinas más ventosas."},
@@ -489,12 +530,13 @@ const DAYS = [
     {tag:"Gastronomía", onscreen:"Prueben: Kopanisti 🧀", voice:"Prueben el kopanisti, un queso picante típico de la isla. Fuerte, con carácter — como la fama fiestera de Mykonos."},
     {tag:"Palabras clave", onscreen:"Para hablar como local", words:true},
     {tag:"Reto — Fátima vs. Martín", onscreen:"¿Quién encuentra los molinos primero?", voice:"Luego busquen juntos una puerta de un color distinto al azul, y el que la encuentre gana el punto extra.", challenge:true},
-    {tag:"Cierre", onscreen:"Mykonos: el viento que ahora mueve la fiesta", voice:"Mykonos: donde el viento que antes molía trigo, hoy mueve la fiesta más famosa de Grecia."}
+    {tag:"Cierre", onscreen:"Mykonos: el viento que ahora mueve la fiesta", voice:"Mykonos: donde el viento que antes molía trigo, hoy mueve la fiesta más famosa de Grecia."},
+    {tag:"🎤 Para contarle al grupo", onscreen:"Los molinos de Mykonos se construyeron porque la isla no tenía buena tierra para cultivar — así que aprovecharon el viento en su lugar.", shareTip:true}
   ]
 },
 {
   place:"Atenas — Acrópolis", country:"Grecia", flag:"🇬🇷", icon:"🏛️", dateLabel:"4 AGO",
-  words:[["Hola","Yiasou"],["Gracias","Efjaristó"],["Adiós","Andío"]],
+  words:[["Hola","Yiasou","yiá-su"],["Gracias","Efjaristó","ef-ja-ris-tó"],["Adiós","Andío","an-dí-o"]],
   scenes:[
     {tag:"Gancho", onscreen:"2,500 años, un terremoto, una guerra y una explosión", voice:"Hoy van a subir a un templo de 2,500 años que sigue en pie a pesar de terremotos, guerras y hasta una explosión. Bienvenidos a la Acrópolis."},
     {tag:"Origen", onscreen:"La ciudad más antigua de Europa", voice:"Atenas está habitada sin parar desde hace más de 3,000 años. La Acrópolis es la colina fortificada donde construyeron el Partenón, dedicado a Atenea, diosa de la sabiduría."},
@@ -503,12 +545,13 @@ const DAYS = [
     {tag:"Gastronomía", onscreen:"Prueben: Souvlaki 🥙", voice:"Prueben un souvlaki: carne a la parrilla en pan pita, con papas fritas adentro. La comida callejera más popular de Grecia."},
     {tag:"Palabras clave", onscreen:"Para hablar como local", words:true},
     {tag:"Reto — Fátima vs. Martín", onscreen:"¿Cuántas columnas tiene el frente del Partenón?", voice:"El que adivine primero cuántas columnas tiene el frente (son 8) gana un punto.", challenge:true},
-    {tag:"Cierre", onscreen:"Atenas: cuna de la democracia", voice:"Atenas: la cuna de la democracia, donde hace 2,500 años la gente ya discutía de política igual que hoy, solo que sin celular."}
+    {tag:"Cierre", onscreen:"Atenas: cuna de la democracia", voice:"Atenas: la cuna de la democracia, donde hace 2,500 años la gente ya discutía de política igual que hoy, solo que sin celular."},
+    {tag:"🎤 Para contarle al grupo", onscreen:"Al Partenón le falta un pedazo del techo por una explosión de pólvora en 1687 — no por el paso del tiempo.", shareTip:true}
   ]
 },
 {
   place:"Olympia", country:"Grecia", flag:"🇬🇷", icon:"🏺", dateLabel:"5 AGO",
-  words:[["Hola","Yiasou"],["Gracias","Efjaristó"],["Adiós","Andío"]],
+  words:[["Hola","Yiasou","yiá-su"],["Gracias","Efjaristó","ef-ja-ris-tó"],["Adiós","Andío","an-dí-o"]],
   scenes:[
     {tag:"Gancho", onscreen:"Aquí nacieron los Juegos Olímpicos", voice:"¿Sabías que estás a punto de pisar el lugar exacto donde nacieron los Juegos Olímpicos, hace casi 3,000 años?"},
     {tag:"Origen", onscreen:"Un santuario dedicado a Zeus", voice:"Olympia no era una ciudad para vivir, sino un santuario dedicado a Zeus. Ahí estaba una estatua tan enorme que era otra de las 7 Maravillas del Mundo Antiguo."},
@@ -517,12 +560,13 @@ const DAYS = [
     {tag:"Gastronomía", onscreen:"Prueben: Yogur griego con miel", voice:"Prueben el yogur griego con miel y nueces, una combinación que se come en Grecia desde la antigüedad."},
     {tag:"Palabras clave", onscreen:"Para hablar como local", words:true},
     {tag:"Reto — Fátima vs. Martín", onscreen:"¡Carrera olímpica de verdad! 🏃", voice:"Párense en la línea de salida y corran juntos los 192 metros hasta la meta. El que llegue primero, gana el título de campeón olímpico del día.", challenge:true},
-    {tag:"Cierre", onscreen:"Olympia: el mundo eligió competir, no pelear", voice:"Olympia: el lugar donde, por primera vez en la historia, el mundo decidió competir en vez de pelear."}
+    {tag:"Cierre", onscreen:"Olympia: el mundo eligió competir, no pelear", voice:"Olympia: el lugar donde, por primera vez en la historia, el mundo decidió competir en vez de pelear."},
+    {tag:"🎤 Para contarle al grupo", onscreen:"En los primeros Juegos Olímpicos, hace casi 3,000 años, hasta las guerras se detenían mientras duraban las competencias.", shareTip:true}
   ]
 },
 {
   place:"Corfú", country:"Grecia", flag:"🇬🇷", icon:"🏰", dateLabel:"6 AGO",
-  words:[["Hola","Yiasou"],["Gracias","Efjaristó"],["Adiós","Andío"]],
+  words:[["Hola","Yiasou","yiá-su"],["Gracias","Efjaristó","ef-ja-ris-tó"],["Adiós","Andío","an-dí-o"]],
   scenes:[
     {tag:"Gancho", onscreen:"Griegos, romanos, venecianos, franceses, ingleses y piratas la quisieron", voice:"¿Sabías que esta isla fue tan codiciada que griegos, romanos, venecianos, franceses, ingleses y hasta piratas pelearon por controlarla?"},
     {tag:"Origen", onscreen:"Fundada hace casi 3,000 años", voice:"Corfú fue fundada por colonos griegos hace casi 3,000 años, en un lugar tan estratégico que se volvió clave para el comercio y la guerra."},
@@ -531,12 +575,13 @@ const DAYS = [
     {tag:"Gastronomía", onscreen:"Prueben: Sofrito corfiota", voice:"Prueben el sofrito corfiota: carne en salsa de ajo, vinagre y perejil, con clara influencia italiana."},
     {tag:"Palabras clave", onscreen:"Para hablar como local", words:true},
     {tag:"Reto — Fátima vs. Martín", onscreen:"¿Quién encuentra las dos fortalezas venecianas?", voice:"Punto extra para quien logre ver alguna cancha de cricket — ¡es rarísimo verla en Grecia!", challenge:true},
-    {tag:"Cierre", onscreen:"Corfú: la isla griega que se viste de Venecia", voice:"Corfú: la isla griega que se viste de Venecia."}
+    {tag:"Cierre", onscreen:"Corfú: la isla griega que se viste de Venecia", voice:"Corfú: la isla griega que se viste de Venecia."},
+    {tag:"🎤 Para contarle al grupo", onscreen:"Corfú es la única parte de Grecia que los otomanos nunca lograron conquistar.", shareTip:true}
   ]
 },
 {
   place:"Dubrovnik", country:"Croacia", flag:"🇭🇷", icon:"🛡️", dateLabel:"7 AGO",
-  words:[["Hola","Bok"],["Gracias","Hvala"],["Adiós","Doviđenja"]],
+  words:[["Hola","Bok","bok"],["Gracias","Hvala","jvá-la"],["Adiós","Doviđenja","do-vi-djé-nya"]],
   scenes:[
     {tag:"Gancho", onscreen:"¿Viste Game of Thrones? Ya estuviste aquí", voice:"¿Reconoces estas murallas? Si has visto Game of Thrones, técnicamente ya estuviste aquí: Dubrovnik fue la ciudad real detrás de 'Desembarco del Rey'."},
     {tag:"Origen", onscreen:"La República de Ragusa", voice:"Dubrovnik nació hace más de 1,300 años como refugio. Con el tiempo se convirtió en la República de Ragusa, tan rica que rivalizaba con Venecia."},
@@ -545,12 +590,13 @@ const DAYS = [
     {tag:"Gastronomía", onscreen:"Prueben: Peka", voice:"Prueben las peka: carne o pulpo cocinado lentamente bajo una campana de hierro con brasas, durante horas."},
     {tag:"Palabras clave", onscreen:"Para hablar como local", words:true},
     {tag:"Reto — Fátima vs. Martín", onscreen:"¿Quién cuenta más torres de vigilancia?", voice:"Bonus: el que reconozca primero alguna locación de Game of Thrones, gana un punto extra.", challenge:true},
-    {tag:"Cierre", onscreen:"Dubrovnik: la más inteligente, no la más fuerte", voice:"Dubrovnik: la ciudad pequeña que sobrevivió 400 años siendo la más inteligente del vecindario, no la más fuerte."}
+    {tag:"Cierre", onscreen:"Dubrovnik: la más inteligente, no la más fuerte", voice:"Dubrovnik: la ciudad pequeña que sobrevivió 400 años siendo la más inteligente del vecindario, no la más fuerte."},
+    {tag:"🎤 Para contarle al grupo", onscreen:"Las murallas de Dubrovnik aparecen en Game of Thrones como la ciudad de 'Desembarco del Rey'.", shareTip:true}
   ]
 },
 {
   place:"Kotor", country:"Montenegro", flag:"🇲🇪", icon:"🐈", dateLabel:"8 AGO",
-  words:[["Hola","Zdravo"],["Gracias","Hvala"],["Adiós","Zbogom"]],
+  words:[["Hola","Zdravo","zdrá-vo"],["Gracias","Hvala","jvá-la"],["Adiós","Zbogom","zbó-gom"]],
   scenes:[
     {tag:"Gancho", onscreen:"Un fiordo de película, al sur de Europa", voice:"¿Sabías que vas a entrar en uno de los fiordos más al sur de Europa, rodeado de montañas que parecen sacadas de una película de fantasía?"},
     {tag:"Origen", onscreen:"El escondite perfecto de comerciantes y piratas", voice:"Kotor está escondida al fondo de una bahía tan protegida que fue el escondite perfecto para barcos, comerciantes y hasta piratas."},
@@ -559,12 +605,13 @@ const DAYS = [
     {tag:"Gastronomía", onscreen:"Prueben: Pršut", voice:"Prueben el pršut, un jamón curado al viento de las montañas, parecido al jamón serrano español."},
     {tag:"Palabras clave", onscreen:"Para hablar como local", words:true},
     {tag:"Reto — Fátima vs. Martín", onscreen:"¿Quién encuentra 3 gatos primero? 🐱🐱🐱", voice:"Punto extra para quien encuentre alguno cerca del Museo de los Gatos.", challenge:true},
-    {tag:"Cierre", onscreen:"Kotor: el mar explorando los Alpes", voice:"Kotor: la ciudad que se esconde entre montañas y agua, como si el mar hubiera decidido meterse a explorar los Alpes."}
+    {tag:"Cierre", onscreen:"Kotor: el mar explorando los Alpes", voice:"Kotor: la ciudad que se esconde entre montañas y agua, como si el mar hubiera decidido meterse a explorar los Alpes."},
+    {tag:"🎤 Para contarle al grupo", onscreen:"Los venecianos trajeron gatos a Kotor a propósito, para controlar las ratas de los barcos — por eso hoy hay tantos.", shareTip:true}
   ]
 },
 {
   place:"Split", country:"Croacia", flag:"🇭🇷", icon:"🏛️", dateLabel:"9 AGO",
-  words:[["Hola","Bok"],["Gracias","Hvala"],["Adiós","Doviđenja"]],
+  words:[["Hola","Bok","bok"],["Gracias","Hvala","jvá-la"],["Adiós","Doviđenja","do-vi-djé-nya"]],
   scenes:[
     {tag:"Gancho", onscreen:"Una ciudad... adentro del palacio de un emperador", voice:"¿Qué tal si te dijera que la ciudad vieja donde van a caminar hoy es el palacio privado de un emperador romano?"},
     {tag:"Origen", onscreen:"El Palacio de Diocleciano, año 305 d.C.", voice:"Split nació dentro del Palacio de Diocleciano, construido para que este emperador se retirara ahí — algo rarísimo para la época."},
@@ -573,12 +620,13 @@ const DAYS = [
     {tag:"Gastronomía", onscreen:"Prueben: Pašticada", voice:"Prueben la pašticada: carne guisada por horas en vino y especias, con un tipo de pasta llamada njoki. Plato de celebración en Croacia."},
     {tag:"Palabras clave", onscreen:"Para hablar como local", words:true},
     {tag:"Reto — Fátima vs. Martín", onscreen:"¿Quién cuenta más columnas egipcias?", voice:"En la catedral, cada uno cuenta cuántas columnas de granito egipcio original encuentra alrededor. ¡Vinieron desde Egipto hace 1,700 años!", challenge:true},
-    {tag:"Cierre", onscreen:"Split: nació adentro de un palacio", voice:"Split: la única ciudad del mundo que nació adentro del palacio de un emperador."}
+    {tag:"Cierre", onscreen:"Split: nació adentro de un palacio", voice:"Split: la única ciudad del mundo que nació adentro del palacio de un emperador."},
+    {tag:"🎤 Para contarle al grupo", onscreen:"La ciudad vieja de Split está construida literalmente adentro del palacio de un emperador romano.", shareTip:true}
   ]
 },
 {
   place:"Ravenna", country:"Italia", flag:"🇮🇹", icon:"🧩", dateLabel:"10 AGO",
-  words:[["Hola","Ciao"],["Gracias","Grazie"],["Adiós","Arrivederci"]],
+  words:[["Hola","Ciao","chao"],["Gracias","Grazie","grá-tsie"],["Adiós","Arrivederci","ar-ri-ve-dér-chi"]],
   scenes:[
     {tag:"Gancho", onscreen:"Más importante que Roma... por un tiempo", voice:"¿Sabías que esta pequeña ciudad italiana fue, durante un tiempo, más importante que Roma?"},
     {tag:"Origen", onscreen:"Capital del Imperio Romano, año 402 d.C.", voice:"Cuando el Imperio Romano se debilitaba, la capital se trasladó de Roma a Ravenna, mejor protegida por pantanos."},
@@ -587,7 +635,8 @@ const DAYS = [
     {tag:"Gastronomía", onscreen:"Prueben: Piadina", voice:"Prueben la piadina: un pan plano relleno de jamón o queso, el 'sándwich' italiano por excelencia de la región."},
     {tag:"Palabras clave", onscreen:"Para hablar como local", words:true},
     {tag:"Reto — Fátima vs. Martín", onscreen:"¿Quién cuenta más colores en un mosaico?", voice:"Algunos mosaicos usan más de 15 tonos diferentes — el que cuente más, gana el punto.", challenge:true},
-    {tag:"Cierre", onscreen:"Ravenna: vio caer un imperio, dejó brillo", voice:"Ravenna: la ciudad que vio caer un imperio y, aun así, dejó al mundo algunas de sus imágenes más brillantes."}
+    {tag:"Cierre", onscreen:"Ravenna: vio caer un imperio, dejó brillo", voice:"Ravenna: la ciudad que vio caer un imperio y, aun así, dejó al mundo algunas de sus imágenes más brillantes."},
+    {tag:"🎤 Para contarle al grupo", onscreen:"Los mosaicos de Ravenna tienen más de 1,500 años y todavía brillan como si fueran nuevos.", shareTip:true}
   ]
 },
 {
@@ -601,13 +650,15 @@ const DAYS = [
     {tag:"Gastronomía", onscreen:"Prueben: Churros con chocolate", voice:"Cierren el viaje con un churro con chocolate espeso, el postre más icónico de Madrid."},
     {tag:"Palabras clave", onscreen:"Ya no hace falta traducir — ¡hora de hablar español!", words:true},
     {tag:"Reto final — en equipo", onscreen:"¿Cuál fue el mejor puerto del viaje?", voice:"Cada uno elige su momento favorito de las 11 paradas y se lo cuenta al otro. Al final, decidan juntos cuál fue el mejor puerto del viaje.", challenge:true},
-    {tag:"Cierre", onscreen:"Madrid: el cierre perfecto de la vuelta al mundo antiguo", voice:"Madrid: la fortaleza militar que, siglos después, terminó siendo el corazón de todo un país — y el cierre perfecto de la vuelta al mundo antiguo."}
+    {tag:"Cierre", onscreen:"Madrid: el cierre perfecto de la vuelta al mundo antiguo", voice:"Madrid: la fortaleza militar que, siglos después, terminó siendo el corazón de todo un país — y el cierre perfecto de la vuelta al mundo antiguo."},
+    {tag:"🎤 Para contarle al grupo", onscreen:"Madrid empezó como una simple fortaleza militar musulmana, siglos antes de convertirse en la capital de España.", shareTip:true}
   ]
 }
 ];
 
 // Build flat slide list: [cover, ...scenes] per day, plus final end slide
 let slides = [];
+slides.push({type:'welcome'});
 DAYS.forEach((d, di)=>{
   slides.push({type:'cover', day:d, dayIndex:di});
   d.scenes.forEach(s=> slides.push({type:'scene', day:d, dayIndex:di, scene:s}));
@@ -630,6 +681,18 @@ function renderStage(){
 }
 
 function buildSlideHTML(s){
+  if(s.type==='welcome'){
+    return `
+      <div class="cover welcome-cover">
+        <div class="cover-content">
+          <div class="giftbadge">💌 Un regalo de mamá</div>
+          <div class="stamp welcome-stamp"><span class="icon">🧭</span></div>
+          <h1>Para Fátima</h1>
+          <p class="welcome-text">Este pasaporte es tuyo. En cada puerto vas a aprender datos curiosos que nadie más del grupo sabe — y tu misión es contárselos a todos antes de bajar del barco. Tú eres la guía turística oficial de este viaje. ¡Que empiece la aventura! 🧳✨</p>
+          <div class="swipehint">Toca o desliza para comenzar →</div>
+        </div>
+      </div>`;
+  }
   if(s.type==='cover'){
     const img = DAY_IMAGES[s.dayIndex];
     const bg = img ? `<div class="cover-bg" style="background-image:url('${img.hero}')"></div><div class="cover-scrim"></div>` : '';
@@ -657,17 +720,26 @@ function buildSlideHTML(s){
       <div class="endslide">
         <div class="bigicon">🧳</div>
         <h1>Fin del viaje</h1>
-        <p>11 países, 3,600 años de historia y un montón de retos ganados. Ahora les toca decidir juntos: ¿cuál fue el mejor puerto del viaje?</p>
+        <p>13 paradas, miles de años de historia, y una guía turística estrella: ¡tú! Ahora les toca decidir juntos: ¿cuál fue el mejor puerto del viaje?</p>
       </div>`;
   }
   // scene
   const sc = s.scene, day = s.day;
   let body = '';
   if(sc.words){
-    const rows = (day.words||[]).map(w=>`<tr><td>${w[0]}</td><td>${w[1]}</td></tr>`).join('');
-    body = `<table class="words-table">${rows}</table>`;
+    const rows = (day.words||[]).map(w=>`<tr><td>${w[0]}</td><td>${w[1]}${w[2] ? ` <span class="pron">(${w[2]})</span>` : ''}</td></tr>`).join('');
+    const encourage = day.words && day.words[0].length > 2
+      ? `<p class="encourage">🗣️ ¡Cada vez que puedas, dile estas palabras a la gente del lugar! Les va a encantar que les hables en su idioma.</p>`
+      : '';
+    body = `<table class="words-table">${rows}</table>${encourage}`;
   } else if(sc.challenge){
     body = `<div class="challenge-card"><span class="vs">${day.flag} Reto de puerto</span>${sc.voice ? `<p class="content">${sc.voice}</p>` : ''}</div>`;
+  } else if(sc.shareTip){
+    return `
+    <div class="card sharetip-card">
+      <span class="eyebrow sharetip-eyebrow">🎤 Fátima, cuéntale esto al grupo</span>
+      <p class="onscreen">${sc.onscreen}</p>
+    </div>`;
   } else if(sc.voice){
     body = `<p class="content">${sc.voice}</p>`;
   }
@@ -693,7 +765,7 @@ function updateActive(){
 function renderProgress(){
   const wrap = document.getElementById('progress');
   wrap.innerHTML = '';
-  let idx = 0;
+  let idx = 1;
   DAYS.forEach((d)=>{
     const group = document.createElement('div');
     group.className = 'day-group';
